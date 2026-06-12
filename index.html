@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'Occhio che Tutto Vede — Ritrova la Verità nel Tuo Cuore</title>
+<meta name="description" content="Un percorso spirituale per chi sente che qualcosa è cambiato nella propria relazione. Ascolta l'intuizione, ritrova la serenità.">
+<style>
+  :root{
+    --bg:#0c0a14;
+    --bg-soft:#141022;
+    --gold:#d9b25a;
+    --gold-soft:#e7cd8c;
+    --violet:#6c4bb8;
+    --text:#efeaf7;
+    --muted:#a99fc4;
+    --line:rgba(217,178,90,.18);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Georgia","Times New Roman",serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+  h1,h2,h3{font-weight:normal;letter-spacing:.5px;line-height:1.25}
+  p{color:var(--muted)}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  .accent{color:var(--gold-soft)}
+
+  /* ---------- Sfondo stellato ---------- */
+  .stars{position:fixed;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(circle at 50% 0%, #1c1533 0%, var(--bg) 60%);}
+  canvas#sky{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+  /* ---------- HERO ---------- */
+  header{position:relative;z-index:2;text-align:center;padding:74px 0 60px}
+  .eye{
+    width:130px;height:130px;margin:0 auto 30px;position:relative;
+    display:flex;align-items:center;justify-content:center;
+  }
+  .eye svg{width:100%;height:100%;filter:drop-shadow(0 0 18px rgba(217,178,90,.55))}
+  .eye .glow{
+    position:absolute;inset:-25px;border-radius:50%;
+    background:radial-gradient(circle, rgba(217,178,90,.28), transparent 65%);
+    animation:breathe 4.5s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{transform:scale(.92);opacity:.6}50%{transform:scale(1.08);opacity:1}}
+  .kicker{color:var(--gold);text-transform:uppercase;letter-spacing:4px;font-size:.72rem;margin-bottom:18px}
+  h1{font-size:2.5rem;margin-bottom:20px}
+  .lead{font-size:1.18rem;max-width:640px;margin:0 auto 34px;color:#cfc7e4}
+
+  .btn{
+    display:inline-block;padding:16px 38px;border-radius:40px;
+    background:linear-gradient(135deg,var(--gold),#b8923f);
+    color:#231a07;font-family:inherit;font-size:1.05rem;letter-spacing:.5px;
+    cursor:pointer;border:none;transition:transform .2s ease, box-shadow .3s ease;
+    box-shadow:0 8px 30px rgba(217,178,90,.3);
+  }
+  .btn:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(217,178,90,.5)}
+  .btn-sub{display:block;margin-top:12px;font-size:.8rem;color:var(--muted);letter-spacing:1px}
+
+  /* ---------- Sezioni ---------- */
+  section{position:relative;z-index:2;padding:58px 0}
+  .center{text-align:center}
+  h2{font-size:1.9rem;margin-bottom:18px}
+  .section-intro{max-width:640px;margin:0 auto 40px}
+
+  /* ---------- Segnali ---------- */
+  .signs{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:18px;margin-top:8px}
+  .sign{
+    background:linear-gradient(180deg,var(--bg-soft),rgba(20,16,34,.5));
+    border:1px solid var(--line);border-radius:16px;padding:26px 24px;
+    transition:transform .25s ease,border-color .25s ease;
+  }
+  .sign:hover{transform:translateY(-5px);border-color:rgba(217,178,90,.45)}
+  .sign .ico{font-size:1.6rem;margin-bottom:12px}
+  .sign h3{font-size:1.12rem;color:var(--gold-soft);margin-bottom:8px}
+  .sign p{font-size:.96rem}
+
+  /* ---------- Racconto ---------- */
+  .story{
+    background:linear-gradient(180deg,rgba(108,75,184,.12),rgba(20,16,34,.4));
+    border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  }
+  .story blockquote{
+    max-width:680px;margin:0 auto;font-size:1.25rem;font-style:italic;
+    color:#e3ddf2;text-align:center;line-height:1.7;
+  }
+  .story cite{display:block;margin-top:18px;font-style:normal;font-size:.9rem;color:var(--gold)}
+
+  /* ---------- Come funziona ---------- */
+  .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:26px;margin-top:10px}
+  .step{text-align:center}
+  .step .num{
+    width:54px;height:54px;line-height:54px;margin:0 auto 16px;border-radius:50%;
+    border:1px solid var(--gold);color:var(--gold);font-size:1.3rem;
+    box-shadow:0 0 22px rgba(217,178,90,.25) inset;
+  }
+  .step h3{font-size:1.1rem;margin-bottom:8px;color:var(--text)}
+  .step p{font-size:.94rem}
+
+  /* ---------- Testimonianze ---------- */
+  .testi{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+  .t{background:var(--bg-soft);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .t p{font-style:italic;color:#d7d0e8;margin-bottom:14px}
+  .t .who{color:var(--gold-soft);font-size:.9rem;font-style:normal}
+  .stars-row{color:var(--gold);letter-spacing:2px;font-size:.85rem;margin-top:6px}
+
+  /* ---------- CTA finale ---------- */
+  .final{text-align:center}
+  .final .panel{
+    background:linear-gradient(180deg,rgba(108,75,184,.16),rgba(20,16,34,.6));
+    border:1px solid rgba(217,178,90,.3);border-radius:24px;padding:54px 30px;
+  }
+  .countdown{font-size:.9rem;color:var(--gold);letter-spacing:2px;margin-top:22px}
+
+  /* ---------- FAQ ---------- */
+  .faq details{
+    border-bottom:1px solid var(--line);padding:18px 4px;cursor:pointer;
+  }
+  .faq summary{font-size:1.05rem;color:var(--text);list-style:none;display:flex;justify-content:space-between;align-items:center}
+  .faq summary::-webkit-details-marker{display:none}
+  .faq summary::after{content:"+";color:var(--gold);font-size:1.4rem;margin-left:14px}
+  .faq details[open] summary::after{content:"–"}
+  .faq p{margin-top:12px;font-size:.97rem}
+
+  /* ---------- Footer ---------- */
+  footer{position:relative;z-index:2;text-align:center;padding:46px 0 60px;border-top:1px solid var(--line);margin-top:30px}
+  footer p{font-size:.82rem;color:#6f6688;max-width:680px;margin:0 auto 10px}
+  .disclaimer{font-size:.74rem;color:#5a5273}
+
+  /* ---------- Reveal animazione ---------- */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .8s ease, transform .8s ease}
+  .reveal.show{opacity:1;transform:none}
+
+  @media(max-width:600px){
+    h1{font-size:1.95rem}.lead{font-size:1.05rem}h2{font-size:1.55rem}
+    header{padding:54px 0 40px}.story blockquote{font-size:1.08rem}
+  }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<canvas id="sky"></canvas>
+
+<!-- HERO -->
+<header>
+  <div class="wrap">
+    <div class="eye">
+      <div class="glow"></div>
+      <svg viewBox="0 0 100 100" fill="none">
+        <path d="M50 18 L86 64 L14 64 Z" stroke="#d9b25a" stroke-width="2.2" stroke-linejoin="round"/>
+        <ellipse cx="50" cy="52" rx="22" ry="13" stroke="#e7cd8c" stroke-width="2"/>
+        <circle cx="50" cy="52" r="6.5" fill="#d9b25a"/>
+        <circle cx="50" cy="52" r="2.4" fill="#0c0a14"/>
+        <g stroke="#d9b25a" stroke-width="1.3" opacity=".7">
+          <line x1="50" y1="30" x2="50" y2="22"/>
+          <line x1="68" y1="40" x2="74" y2="35"/>
+          <line x1="32" y1="40" x2="26" y2="35"/>
+        </g>
+      </svg>
+    </div>
+    <div class="kicker">L'Occhio che Tutto Vede</div>
+    <h1>Senti che qualcosa è <span class="accent">cambiato</span>,<br>ma non sai darle un nome?</h1>
+    <p class="lead">Quando il cuore percepisce una distanza che le parole non spiegano, c'è una saggezza antica pronta ad ascoltarti. Ritrova la tua serenità e la verità che meriti.</p>
+    <a href="#offerta" class="btn">Apri il Tuo Occhio Interiore
+      <span class="btn-sub">Inizia il percorso oggi stesso</span>
+    </a>
+  </div>
+</header>
+
+<!-- SEGNALI -->
+<section>
+  <div class="wrap">
+    <div class="center section-intro reveal">
+      <h2>Hai notato anche tu questi <span class="accent">segnali</span>?</h2>
+      <p>L'intuizione raramente sbaglia. Sono i piccoli cambiamenti, quelli silenziosi, a parlare più forte.</p>
+    </div>
+    <div class="signs">
+      <div class="sign reveal"><div class="ico">🌙</div><h3>Una distanza nuova</h3><p>Sguardi che si abbassano, silenzi che prima non c'erano, una freddezza che fatica a spiegarsi.</p></div>
+      <div class="sign reveal"><div class="ico">📱</div><h3>Telefono sempre vicino</h3><p>Il cellulare girato verso il basso, nuove abitudini, momenti in cui sembra altrove con la mente.</p></div>
+      <div class="sign reveal"><div class="ico">🕰️</div><h3>Tempo che svanisce</h3><p>Orari che non tornano, impegni improvvisi, scuse che lasciano più domande che risposte.</p></div>
+      <div class="sign reveal"><div class="ico">💔</div><h3>Un cuore inquieto</h3><p>Quella sensazione allo stomaco che torna ogni notte. Non sei pazza: stai solo ascoltando te stessa.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- RACCONTO -->
+<section class="story">
+  <div class="wrap">
+    <blockquote class="reveal">
+      “Per mesi ho ignorato quella voce dentro di me. Mi dicevo che stavo esagerando. Ma il dubbio non mi lasciava dormire. Quando ho imparato ad <span class="accent">ascoltare davvero la mia intuizione</span>, tutto è diventato chiaro — e finalmente ho ritrovato la pace.”
+      <cite>— Una donna come te, che ha scelto di sapere</cite>
+    </blockquote>
+  </div>
+</section>
+
+<!-- COME FUNZIONA -->
+<section>
+  <div class="wrap">
+    <div class="center section-intro reveal">
+      <h2>Il cammino dell'<span class="accent">Occhio che Tutto Vede</span></h2>
+      <p>Un percorso semplice, intimo e riservato, per riconnetterti alla tua voce interiore e leggere ciò che è rimasto nell'ombra.</p>
+    </div>
+    <div class="steps">
+      <div class="step reveal"><div class="num">I</div><h3>Apri il tuo cuore</h3><p>Rispondi a poche domande guidate sulla tua relazione. Nessun giudizio, solo verità.</p></div>
+      <div class="step reveal"><div class="num">II</div><h3>Risveglia l'intuizione</h3><p>Un rituale spirituale di chiarezza ti aiuta a focalizzare ciò che senti ma non riesci a vedere.</p></div>
+      <div class="step reveal"><div class="num">III</div><h3>Ricevi la tua risposta</h3><p>L'Occhio illumina ciò che era nascosto. Finalmente potrai scegliere con il cuore sereno.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIANZE -->
+<section class="story">
+  <div class="wrap">
+    <div class="center section-intro reveal">
+      <h2>Chi ha già <span class="accent">aperto gli occhi</span></h2>
+    </div>
+    <div class="testi">
+      <div class="t reveal"><p>“Avevo bisogno di chiarezza, non di altre bugie. Questo percorso mi ha dato la forza di guardare in faccia la verità.”</p><span class="who">Giulia, Milano</span><div class="stars-row">★★★★★</div></div>
+      <div class="t reveal"><p>“Mi sentivo sola con i miei dubbi. Oggi finalmente dormo serena, perché so.”</p><span class="who">Federica, Napoli</span><div class="stars-row">★★★★★</div></div>
+      <div class="t reveal"><p>“Non è magia, è ascoltare se stessi. Mi ha aiutata a fidarmi del mio istinto.”</p><span class="who">Sara, Torino</span><div class="stars-row">★★★★★</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINALE -->
+<section class="final" id="offerta">
+  <div class="wrap">
+    <div class="panel reveal">
+      <div class="kicker" style="margin-bottom:14px">Il momento è adesso</div>
+      <h2>Smetti di vivere nel <span class="accent">dubbio</span></h2>
+      <p class="section-intro" style="margin-top:14px">Meriti la verità e la serenità che ne deriva. L'Occhio che Tutto Vede è pronto ad accompagnarti, con discrezione e rispetto, verso le risposte che cerchi.</p>
+      <a href="#" class="btn" id="cta">Voglio Scoprire la Verità
+        <span class="btn-sub">Percorso riservato · 100% confidenziale</span>
+      </a>
+      <div class="countdown" id="cd">Questa sessione di accesso resta aperta ancora per 09:59</div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap">
+    <div class="center section-intro reveal"><h2>Domande <span class="accent">frequenti</span></h2></div>
+    <details class="reveal"><summary>È tutto riservato?</summary><p>Assolutamente sì. Il tuo percorso è personale e confidenziale. Nessuno saprà mai che lo hai intrapreso.</p></details>
+    <details class="reveal"><summary>Devo avere esperienza con la spiritualità?</summary><p>No. Sarai guidata passo dopo passo. Tutto ciò che serve è la voglia di ascoltare te stessa.</p></details>
+    <details class="reveal"><summary>Quanto tempo richiede?</summary><p>Pochi minuti per iniziare. La chiarezza, però, può cambiare tutto.</p></details>
+    <details class="reveal"><summary>E se scoprissi qualcosa che fa male?</summary><p>La verità, anche quando fa male, libera. Meglio sapere e ritrovare la pace, che restare prigioniera del dubbio.</p></details>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="eye" style="width:54px;height:54px;margin-bottom:18px">
+      <svg viewBox="0 0 100 100" fill="none"><path d="M50 18 L86 64 L14 64 Z" stroke="#d9b25a" stroke-width="3" stroke-linejoin="round"/><ellipse cx="50" cy="52" rx="22" ry="13" stroke="#e7cd8c" stroke-width="3"/><circle cx="50" cy="52" r="6.5" fill="#d9b25a"/></svg>
+    </div>
+    <p>L'Occhio che Tutto Vede — Un cammino di consapevolezza e ascolto interiore.</p>
+    <p class="disclaimer">Questo percorso ha finalità di intrattenimento, riflessione personale e crescita spirituale. Non sostituisce consulenze psicologiche, legali o professionali. I risultati possono variare da persona a persona.</p>
+    <p class="disclaimer">© 2026 · Tutti i diritti riservati.</p>
+  </div>
+</footer>
+
+<script>
+  /* Reveal allo scroll */
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('show')});return;}
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('show');io.unobserve(en.target);}});
+    },{threshold:.15});
+    els.forEach(function(e){io.observe(e)});
+  })();
+
+  /* Cielo stellato */
+  (function(){
+    var c=document.getElementById('sky'),x=c.getContext('2d'),stars=[],w,h;
+    function size(){w=c.width=innerWidth;h=c.height=innerHeight;build();}
+    function build(){stars=[];var n=Math.min(140,Math.floor(w*h/9000));
+      for(var i=0;i<n;i++){stars.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*1.3+.2,a:Math.random(),s:Math.random()*.02+.004});}}
+    function loop(){x.clearRect(0,0,w,h);
+      for(var i=0;i<stars.length;i++){var st=stars[i];st.a+=st.s;var o=.3+Math.abs(Math.sin(st.a))*.7;
+        x.beginPath();x.arc(st.x,st.y,st.r,0,7);x.fillStyle='rgba(231,205,140,'+o+')';x.fill();}
+      requestAnimationFrame(loop);}
+    addEventListener('resize',size);size();loop();
+  })();
+
+  /* Countdown leggero */
+  (function(){
+    var el=document.getElementById('cd');if(!el)return;
+    var t=599;
+    setInterval(function(){
+      if(t>0)t--;
+      var m=String(Math.floor(t/60)).padStart(2,'0'),s=String(t%60).padStart(2,'0');
+      el.textContent='Questa sessione di accesso resta aperta ancora per '+m+':'+s;
+    },1000);
+  })();
+
+  /* CTA placeholder */
+  document.getElementById('cta').addEventListener('click',function(e){
+    e.preventDefault();
+    this.querySelector('.btn-sub').textContent='Ti stiamo accompagnando...';
+  });
+</script>
+</body>
+</html>
